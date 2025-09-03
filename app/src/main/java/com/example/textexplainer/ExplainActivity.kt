@@ -29,9 +29,10 @@ class ExplainActivity : AppCompatActivity() {
         preview = findViewById(R.id.preview)
         result = findViewById(R.id.result)
         progress = findViewById(R.id.progress)
+        
+        val selected = getIncomingText()
+        preview.text = if (selected.length <= 400) selected else selected.substring(0, 400) + "…"
 
-        val selected = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString() ?: ""
-        preview.text = if (selected.length <= 400) selected else selected.take(400) + "…"
 
         lifecycleScope.launch {
             val explanation = withContext(Dispatchers.IO) {
@@ -60,4 +61,16 @@ class ExplainActivity : AppCompatActivity() {
         val words = text.trim().split(Regex("\\s+"))
         return if (words.size <= maxWords) text else words.take(maxWords).joinToString(" ") + "…"
     }
+        // ExplainActivity.kt  (add this method)
+    private fun getIncomingText(): String {
+        return when (intent.action) {
+            Intent.ACTION_PROCESS_TEXT ->
+                intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
+            Intent.ACTION_SEND ->
+                intent.getStringExtra(Intent.EXTRA_TEXT)
+            else ->
+                intent.getStringExtra("text") // from our Tile or launcher paste
+        } ?: ""
+    }
+
 }
