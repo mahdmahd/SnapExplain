@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 
 object LlmClient {
     private const val BASE_URL = "https://api.avalai.ir/v1"
-    // ⚠️ If you ship a real key here, rotate it if your APK is shared.
+    // ⚠️ If you ship a real key here, rotate it if the APK is shared.
     private const val API_KEY  = "aa-ud4ZNNDkJpLBw4Om9z7vnwsejt7bsWB7VETuKx2OBX71d8oq"
 
     private val client = OkHttpClient.Builder()
@@ -19,24 +19,24 @@ object LlmClient {
         .build()
 
     fun explain(
-    text: String,
-    lang: String = "fa",
-    maxTokens: Int = 600,
-    temperature: Float = 0.3f,
-    promptTemplate: String = "Explain the following text clearly and simply."
-): String {
-    if (API_KEY.isBlank()) return "API key missing."
+        text: String,
+        lang: String = "fa",
+        maxTokens: Int = 600,
+        temperature: Float = 0.3f,
+        promptTemplate: String = "Explain the following text clearly and simply."
+    ): String {
+        if (API_KEY.isBlank()) return "API key missing."
 
-    val prompt = """
-        $promptTemplate
-        Language: ${if (lang == "fa") "فارسی" else lang}.
-        
-        «$text»
-    """.trimIndent()
+        val prompt = """
+            $promptTemplate
+            Language: ${if (lang == "fa") "فارسی" else lang}.
+            
+            «$text»
+        """.trimIndent()
 
         val payload = JSONObject()
             // Make sure this model name exists on your AvalAI endpoint
-            .put("model", "gpt-5-mini")
+            .put("model", "gpt-4o")
             .put("messages", JSONArray().put(
                 JSONObject().put("role","user").put("content", prompt)
             ))
