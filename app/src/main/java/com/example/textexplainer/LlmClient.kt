@@ -31,7 +31,7 @@ object LlmClient {
                 JSONObject().put("role","user").put("content", prompt)
             ))
             .put("temperature", 0.2)
-            .put("max_tokens", 220)
+            .put("max_tokens", 2000)
 
         val req = Request.Builder()
             .url("$BASE_URL/chat/completions")
