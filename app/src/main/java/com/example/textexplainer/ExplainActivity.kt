@@ -35,6 +35,7 @@ class ExplainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_explain)
 
         preview = findViewById(R.id.preview)
+        val scrollResult = findViewById<ScrollView>(R.id.scroll_result)
         result = findViewById(R.id.result)
         progress = findViewById(R.id.progress)
 
