@@ -1,85 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="vertical" android:padding="16dp"
-        android:layout_width="match_parent" android:layout_height="wrap_content">
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title"
+        android:text="@string/explain_action"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Scrollable PREVIEW -->
+    <ScrollView
+        android:id="@+id/scroll_preview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:layout_marginTop="8dp">
 
         <TextView
-            android:text="@string/hello"
-            android:textSize="16sp"
-            android:layout_width="match_parent" android:layout_height="wrap_content"/>
-
-        <!-- Paste & explain -->
-        <EditText
-            android:id="@+id/input"
-            android:hint="Paste text here…"
-            android:minHeight="96dp"
-            android:gravity="top"
-            android:inputType="textMultiLine"
+            android:id="@+id/preview"
+            android:textSize="14sp"
+            android:alpha="0.8"
             android:padding="8dp"
-            android:background="#EEEEEE"
-            android:layout_marginTop="12dp"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <!-- Progress spinner -->
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp" />
+
+    <!-- Scrollable RESULT -->
+    <ScrollView
+        android:id="@+id/scroll_result"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:visibility="gone"
+        android:fillViewport="true"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/result"
+            android:textSize="15sp"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <!-- Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/btn_copy"
+            android:text="@string/copy"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/btn_explain"
-            android:text="@string/explain_action"
-            android:layout_marginTop="12dp"
+            android:id="@+id/btn_close"
+            android:text="@string/close"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <!-- Settings header -->
-        <TextView
-            android:text="Settings"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:layout_marginTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- Language -->
-        <EditText
-            android:id="@+id/et_lang"
-            android:hint="Language (fa/en)"
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- max_tokens -->
-        <EditText
-            android:id="@+id/et_max_tokens"
-            android:hint="max_tokens (e.g., 600)"
-            android:inputType="number"
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- temperature -->
-        <EditText
-            android:id="@+id/et_temperature"
-            android:hint="temperature 0.0–1.0 (e.g., 0.3)"
-            android:inputType="numberDecimal"
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <!-- k (word limit for UI) -->
-        <EditText
-            android:id="@+id/et_word_limit"
-            android:hint="UI word limit k (e.g., 1000)"
-            android:inputType="number"
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btn_save"
-            android:text="Save Settings"
-            android:layout_marginTop="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp" />
     </LinearLayout>
-</ScrollView>
+</LinearLayout>
