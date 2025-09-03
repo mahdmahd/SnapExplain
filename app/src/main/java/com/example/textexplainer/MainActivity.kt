@@ -17,7 +17,9 @@ class MainActivity : AppCompatActivity() {
         val etTemp = findViewById<EditText>(R.id.et_temperature)
         val etWordLimit = findViewById<EditText>(R.id.et_word_limit)
         val etPrompt = findViewById<EditText>(R.id.et_prompt)
+        val etBaseUrl = findViewById<EditText>(R.id.et_base_url)
         val etApiKey = findViewById<EditText>(R.id.et_api_key)
+        val etModel = findViewById<EditText>(R.id.et_model)
 
         // Load current settings
         etLang.setText(Settings.getLang(this))
@@ -25,7 +27,9 @@ class MainActivity : AppCompatActivity() {
         etTemp.setText(Settings.getTemperature(this).toString())
         etWordLimit.setText(Settings.getWordLimit(this).toString())
         etPrompt.setText(Settings.getPrompt(this))
+        etBaseUrl.setText(Settings.getBaseUrl(this))
         etApiKey.setText(Settings.getApiKey(this))
+        etModel.setText(Settings.getModel(this))
 
         findViewById<Button>(R.id.btn_save).setOnClickListener {
             Settings.setLang(this, etLang.text?.toString()?.ifBlank { "fa" } ?: "fa")
@@ -33,7 +37,9 @@ class MainActivity : AppCompatActivity() {
             Settings.setTemperature(this, etTemp.text?.toString()?.toFloatOrNull() ?: 0.3f)
             Settings.setWordLimit(this, etWordLimit.text?.toString()?.toIntOrNull() ?: 1000)
             Settings.setPrompt(this, etPrompt.text?.toString()?.ifBlank { Settings.getPrompt(this) } ?: Settings.getPrompt(this))
+            Settings.setBaseUrl(this, etBaseUrl.text?.toString()?.trim()?.ifBlank { Settings.getBaseUrl(this) } ?: Settings.getBaseUrl(this))
             Settings.setApiKey(this, etApiKey.text?.toString()?.trim() ?: "")
+            Settings.setModel(this, etModel.text?.toString()?.trim()?.ifBlank { Settings.getModel(this) } ?: Settings.getModel(this))
         }
 
         findViewById<Button>(R.id.btn_explain).setOnClickListener {
