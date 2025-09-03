@@ -19,24 +19,24 @@ object LlmClient {
         .build()
 
     fun explain(
-        text: String,
-        lang: String = "fa",
-        maxTokens: Int = 600,
-        temperature: Float = 0.3f
-    ): String {
-        if (API_KEY.isBlank()) return "API key missing."
+    text: String,
+    lang: String = "fa",
+    maxTokens: Int = 600,
+    temperature: Float = 0.3f,
+    promptTemplate: String = "Explain the following text clearly and simply."
+): String {
+    if (API_KEY.isBlank()) return "API key missing."
 
-        val prompt = """
-            توضیح بده متن زیر را با زبانی ساده و روان. 
-            حداکثر ${maxTokens} توکن خروجی؛ اگر لازم است نکات کلیدی را فهرست کن. 
-            زبان: ${if (lang == "fa") "فارسی" else lang}.
-            
-            «$text»
-        """.trimIndent()
+    val prompt = """
+        $promptTemplate
+        Language: ${if (lang == "fa") "فارسی" else lang}.
+        
+        «$text»
+    """.trimIndent()
 
         val payload = JSONObject()
             // Make sure this model name exists on your AvalAI endpoint
-            .put("model", "gpt-4o")
+            .put("model", "gpt-5-mini")
             .put("messages", JSONArray().put(
                 JSONObject().put("role","user").put("content", prompt)
             ))
