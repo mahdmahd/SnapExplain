@@ -31,7 +31,7 @@ class ExplainActivity : AppCompatActivity() {
             Intent.ACTION_SEND ->
                 intent.getStringExtra(Intent.EXTRA_TEXT)
             else ->
-                intent.getStringExtra("text") // from launcher paste or QS tile
+                intent.getStringExtra("text")
         } ?: ""
     }
 
@@ -48,25 +48,31 @@ class ExplainActivity : AppCompatActivity() {
         val selected = getIncomingText().trim()
         preview.text = if (selected.length <= 400) selected else selected.substring(0, 400) + "…"
 
-        // Load current settings
+        // Load settings
         val lang = Settings.getLang(this)
         val maxTokens = Settings.getMaxTokens(this)
         val temp = Settings.getTemperature(this)
         val k = Settings.getWordLimit(this)
         val prompt = Settings.getPrompt(this)
+        val apiKey = Settings.getApiKey(this)
+        val baseUrl = Settings.getBaseUrl(this)
+        val model = Settings.getModel(this)
 
         lifecycleScope.launch {
             val explanation = withContext(Dispatchers.IO) {
                 try {
                     if (selected.isEmpty()) {
-                        "No text received. Try Share → Text Explainer, the QS tile after copying, or paste in the main screen."
+                        "No text received."
                     } else {
                         LlmClient.explain(
                             selected,
                             lang = lang,
                             maxTokens = maxTokens,
                             temperature = temp,
-                            promptTemplate = prompt
+                            promptTemplate = prompt,
+                            apiKey = apiKey,
+                            baseUrl = baseUrl,
+                            model = model
                         )
                     }
                 } catch (e: Exception) {
@@ -75,7 +81,6 @@ class ExplainActivity : AppCompatActivity() {
                 }
             }
 
-            // Show result
             progress.visibility = View.GONE
             scrollResult.visibility = View.VISIBLE
             result.visibility = View.VISIBLE
