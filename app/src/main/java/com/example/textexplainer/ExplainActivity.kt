@@ -21,6 +21,14 @@ class ExplainActivity : AppCompatActivity() {
     private lateinit var result: TextView
     private lateinit var progress: ProgressBar
 
+    private fun getIncomingText(): String {
+        return when (intent.action) {
+            Intent.ACTION_PROCESS_TEXT -> intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
+            Intent.ACTION_SEND -> intent.getStringExtra(Intent.EXTRA_TEXT)
+            else -> intent.getStringExtra("text")
+        } ?: ""
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE)
         super.onCreate(savedInstanceState)
@@ -29,20 +37,14 @@ class ExplainActivity : AppCompatActivity() {
         preview = findViewById(R.id.preview)
         result = findViewById(R.id.result)
         progress = findViewById(R.id.progress)
-        
-        val selected = getIncomingText()
-        preview.text = if (selected.length <= 400) selected else selected.substring(0, 400) + "…"
 
+        val selected = getIncomingText()
+        preview.text = if (selected.length <= 400) selected else selected.take(400) + "…"
 
         lifecycleScope.launch {
             val explanation = withContext(Dispatchers.IO) {
-                try {
-                    LlmClient.explain(
-                        "Explain the following text in under 100 words, in clear, simple language.\n\n\"$selected\""
-                    )
-                } catch (e: Exception) {
-                    "Error: ${e.message ?: "failed to get explanation."}"
-                }
+                try { LlmClient.explain(selected) }
+                catch (e: Exception) { "Error: ${e.message ?: "failed to get explanation."}" }
             }
             progress.visibility = View.GONE
             result.visibility = View.VISIBLE
@@ -58,19 +60,7 @@ class ExplainActivity : AppCompatActivity() {
     }
 
     private fun enforceWordLimit(text: String, maxWords: Int): String {
-        val words = text.trim().split(Regex("\\s+"))
+        val words = text.trim().split(Regex("\s+"))
         return if (words.size <= maxWords) text else words.take(maxWords).joinToString(" ") + "…"
     }
-        // ExplainActivity.kt  (add this method)
-    private fun getIncomingText(): String {
-        return when (intent.action) {
-            Intent.ACTION_PROCESS_TEXT ->
-                intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
-            Intent.ACTION_SEND ->
-                intent.getStringExtra(Intent.EXTRA_TEXT)
-            else ->
-                intent.getStringExtra("text") // from our Tile or launcher paste
-        } ?: ""
-    }
-
 }

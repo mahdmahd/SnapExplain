@@ -9,9 +9,7 @@ import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
 object LlmClient {
-    // OpenAI-compatible AvalAI endpoint
     private const val BASE_URL = "https://api.avalai.ir/v1"
-    // ⚠️ Paste your key here (it will be inside the APK)
     private const val API_KEY  = "aa-ud4ZNNDkJpLBw4Om9z7vnwsejt7bsWB7VETuKx2OBX71d8oq"
 
     private val client = OkHttpClient.Builder()
@@ -20,7 +18,7 @@ object LlmClient {
         .build()
 
     fun explain(text: String, lang: String = "en"): String {
-        if (API_KEY.isBlank()) return "API key missing in build."
+        if (API_KEY.isBlank()) return "API key missing."
 
         val prompt = """Explain the following text in under 100 words, clear and simple ($lang).
 
@@ -28,7 +26,7 @@ object LlmClient {
 """.trimIndent()
 
         val payload = JSONObject()
-            .put("model", "gpt-4o") // or "gpt-4o-mini" if that’s enabled for your account
+            .put("model", "gpt-4o")
             .put("messages", JSONArray().put(
                 JSONObject().put("role","user").put("content", prompt)
             ))

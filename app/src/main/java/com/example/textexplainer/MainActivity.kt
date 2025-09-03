@@ -10,7 +10,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val input = findViewById<EditText>(R.id.input)
         findViewById<Button>(R.id.btn_explain).setOnClickListener {
             val text = input.text?.toString() ?: ""
