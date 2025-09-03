@@ -1,5 +1,5 @@
 package com.example.textexplainer
-
+import android.widget.ScrollView   // <-- add this
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
