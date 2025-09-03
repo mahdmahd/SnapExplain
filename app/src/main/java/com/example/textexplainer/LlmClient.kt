@@ -20,13 +20,13 @@ object LlmClient {
     fun explain(text: String, lang: String = "en"): String {
         if (API_KEY.isBlank()) return "API key missing."
 
-        val prompt = """Explain the following text in under 100 words, clear and simple (in persian) ($lang).
+        val prompt = """Explain the following text in under 1000 words, clear and simple (in persian) ($lang).
 
 "$text"
 """.trimIndent()
 
         val payload = JSONObject()
-            .put("model", "gpt-4o-mini")
+            .put("model", "gpt-5-mini")
             .put("messages", JSONArray().put(
                 JSONObject().put("role","user").put("content", prompt)
             ))
