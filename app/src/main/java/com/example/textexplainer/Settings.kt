@@ -30,4 +30,9 @@ object Settings {
 
     fun getTemperature(ctx: Context) = prefs(ctx).getFloat(KEY_TEMPERATURE, DEF_TEMPERATURE)
     fun setTemperature(ctx: Context, v: Float) =
-        prefs(ctx).edit().putFloat(KEY_TEMPERATURE, v.coerceIn(0f, 1f)).apply
+        prefs(ctx).edit().putFloat(KEY_TEMPERATURE, v.coerceIn(0f, 1f)).apply()
+
+    fun getWordLimit(ctx: Context) = prefs(ctx).getInt(KEY_WORD_LIMIT, DEF_WORD_LIMIT)
+    fun setWordLimit(ctx: Context, v: Int) =
+        prefs(ctx).edit().putInt(KEY_WORD_LIMIT, max(10, min(5000, v))).apply()
+}
