@@ -1,7 +1,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:padding="16dp"
-    android:background="#FFFFFF" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent" android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv"
+        android:text="@string/hello"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/input"
+        android:hint="Paste text here…"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="96dp"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:padding="8dp"
+        android:background="#EEEEEE"
+        android:layout_marginTop="12dp"/>
+    <Button
+        android:id="@+id/btn_explain"
+        android:text="@string/explain_action"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"/>
     <TextView android:id="@+id/title" android:text="@string/explain_action"
         android:textStyle="bold" android:textSize="18sp"
         android:layout_width="match_parent" android:layout_height="wrap_content"/>
