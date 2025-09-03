@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:padding="16dp"
@@ -5,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Title -->
     <TextView
         android:id="@+id/title"
         android:text="@string/explain_action"
@@ -13,22 +15,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:id="@+id/preview"
-        android:textSize="14sp"
-        android:paddingTop="8dp"
-        android:alpha="0.7"
+    <!-- Scrollable PREVIEW of selected text -->
+    <ScrollView
+        android:id="@+id/scroll_preview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:layout_marginTop="8dp">
 
+        <TextView
+            android:id="@+id/preview"
+            android:textSize="14sp"
+            android:alpha="0.8"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
+
+    <!-- Progress spinner while waiting -->
     <ProgressBar
         android:id="@+id/progress"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="8dp" />
 
+    <!-- Scrollable RESULT area -->
     <ScrollView
         android:id="@+id/scroll_result"
         android:layout_width="match_parent"
@@ -36,7 +50,7 @@
         android:layout_weight="1"
         android:visibility="gone"
         android:fillViewport="true"
-        android:layout_marginTop="12dp">
+        android:layout_marginTop="8dp">
 
         <TextView
             android:id="@+id/result"
@@ -46,11 +60,12 @@
             android:layout_height="wrap_content" />
     </ScrollView>
 
+    <!-- Buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:paddingTop="12dp">
+        android:layout_marginTop="12dp">
 
         <Button
             android:id="@+id/btn_copy"
@@ -65,4 +80,5 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp" />
     </LinearLayout>
+
 </LinearLayout>
