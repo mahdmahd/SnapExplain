@@ -14,6 +14,8 @@ object Settings {
     private const val KEY_WORD_LIMIT = "word_limit"
     private const val KEY_PROMPT = "prompt"
     private const val KEY_API_KEY = "api_key"
+    private const val KEY_BASE_URL = "base_url"
+    private const val KEY_MODEL = "model"
 
     // Defaults
     private const val DEF_LANG = "fa"
@@ -22,7 +24,9 @@ object Settings {
     private const val DEF_WORD_LIMIT = 100
     private const val DEF_PROMPT =
         "Explain the following text clearly and simply. If needed, list key points."
-    private const val DEF_API_KEY = ""   // leave empty by default
+    private const val DEF_API_KEY = "" // empty by default
+    private const val DEF_BASE_URL = "https://api.avalai.ir/v1"
+    private const val DEF_MODEL = "gpt-4o"
 
     private fun prefs(ctx: Context): SharedPreferences =
         ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -47,4 +51,10 @@ object Settings {
 
     fun getApiKey(ctx: Context) = prefs(ctx).getString(KEY_API_KEY, DEF_API_KEY) ?: DEF_API_KEY
     fun setApiKey(ctx: Context, v: String) = prefs(ctx).edit().putString(KEY_API_KEY, v).apply()
+
+    fun getBaseUrl(ctx: Context) = prefs(ctx).getString(KEY_BASE_URL, DEF_BASE_URL) ?: DEF_BASE_URL
+    fun setBaseUrl(ctx: Context, v: String) = prefs(ctx).edit().putString(KEY_BASE_URL, v).apply()
+
+    fun getModel(ctx: Context) = prefs(ctx).getString(KEY_MODEL, DEF_MODEL) ?: DEF_MODEL
+    fun setModel(ctx: Context, v: String) = prefs(ctx).edit().putString(KEY_MODEL, v).apply()
 }
