@@ -26,7 +26,7 @@ object LlmClient {
 """.trimIndent()
 
         val payload = JSONObject()
-            .put("model", "gpt-4o")
+            .put("model", "gpt-4o-mini")
             .put("messages", JSONArray().put(
                 JSONObject().put("role","user").put("content", prompt)
             ))
