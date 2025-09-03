@@ -9,7 +9,6 @@ import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
 object LlmClient {
-    private const val BASE_URL = "https://api.avalai.ir/v1"
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(15, TimeUnit.SECONDS)
@@ -22,9 +21,12 @@ object LlmClient {
         maxTokens: Int = 600,
         temperature: Float = 0.3f,
         promptTemplate: String = "Explain the following text clearly and simply.",
-        apiKey: String
+        apiKey: String,
+        baseUrl: String,
+        model: String
     ): String {
         if (apiKey.isBlank()) return "API key missing."
+        val url = (baseUrl.ifBlank { "https://api.avalai.ir/v1" }).trimEnd('/')
 
         val prompt = """
             $promptTemplate
@@ -34,7 +36,7 @@ object LlmClient {
         """.trimIndent()
 
         val payload = JSONObject()
-            .put("model", "gpt-4o") // ensure this model exists on AvalAI
+            .put("model", model.ifBlank { "gpt-4o" })
             .put("messages", JSONArray().put(
                 JSONObject().put("role","user").put("content", prompt)
             ))
@@ -42,7 +44,7 @@ object LlmClient {
             .put("max_tokens", maxTokens)
 
         val req = Request.Builder()
-            .url("$BASE_URL/chat/completions")
+            .url("$url/chat/completions")
             .header("Authorization", "Bearer $apiKey")
             .post(payload.toString().toRequestBody("application/json".toMediaType()))
             .build()
