@@ -55,25 +55,24 @@ class ExplainActivity : AppCompatActivity() {
         val k = Settings.getWordLimit(this)
         val prompt = Settings.getPrompt(this)
 
-
         lifecycleScope.launch {
             val explanation = withContext(Dispatchers.IO) {
-    try {
-        if (selected.isEmpty()) {
-            "No text received."
-        } else {
-            LlmClient.explain(
-                selected,
-                lang = lang,
-                maxTokens = maxTokens,
-                temperature = temp,
-                promptTemplate = prompt
-            )
-        }
-    } catch (e: Exception) {
-        "Error: ${e.message ?: "failed"}"
-    }
-            }
+                try {
+                    if (selected.isEmpty()) {
+                        "No text received. Try Share → Text Explainer, the QS tile after copying, or paste in the main screen."
+                    } else {
+                        LlmClient.explain(
+                            selected,
+                            lang = lang,
+                            maxTokens = maxTokens,
+                            temperature = temp,
+                            promptTemplate = prompt
+                        )
+                    }
+                } catch (e: Exception) {
+                    Log.e("ExplainActivity", "LLM error", e)
+                    "Error: ${e.message ?: "failed to get explanation."}"
+                }
             }
 
             // Show result
