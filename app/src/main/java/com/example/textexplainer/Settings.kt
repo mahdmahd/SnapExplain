@@ -13,14 +13,16 @@ object Settings {
     private const val KEY_TEMPERATURE = "temperature"
     private const val KEY_WORD_LIMIT = "word_limit"
     private const val KEY_PROMPT = "prompt"
+    private const val KEY_API_KEY = "api_key"
 
     // Defaults
-    private const val DEF_LANG = "fa"                  // "fa" (Persian) or "en"
-    private const val DEF_MAX_TOKENS = 600             // API output length
-    private const val DEF_TEMPERATURE = 0.3f           // 0.0 – 1.0
-    private const val DEF_WORD_LIMIT = 100             // UI clipping limit (k)
+    private const val DEF_LANG = "fa"
+    private const val DEF_MAX_TOKENS = 600
+    private const val DEF_TEMPERATURE = 0.3f
+    private const val DEF_WORD_LIMIT = 100
     private const val DEF_PROMPT =
         "Explain the following text clearly and simply. If needed, list key points."
+    private const val DEF_API_KEY = ""   // leave empty by default
 
     private fun prefs(ctx: Context): SharedPreferences =
         ctx.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
@@ -42,4 +44,7 @@ object Settings {
 
     fun getPrompt(ctx: Context) = prefs(ctx).getString(KEY_PROMPT, DEF_PROMPT) ?: DEF_PROMPT
     fun setPrompt(ctx: Context, v: String) = prefs(ctx).edit().putString(KEY_PROMPT, v).apply()
+
+    fun getApiKey(ctx: Context) = prefs(ctx).getString(KEY_API_KEY, DEF_API_KEY) ?: DEF_API_KEY
+    fun setApiKey(ctx: Context, v: String) = prefs(ctx).edit().putString(KEY_API_KEY, v).apply()
 }
