@@ -57,7 +57,7 @@ class ExplainActivity : AppCompatActivity() {
             }
             progress.visibility = View.GONE
             scrollResult.visibility = View.VISIBLE
-            result.text = enforceWordLimit(explanation, 100)
+            result.text = enforceWordLimit(explanation, 1500)
         }
 
         findViewById<Button>(R.id.btn_copy).setOnClickListener {
