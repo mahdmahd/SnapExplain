@@ -16,10 +16,30 @@
             android:exported="true"
             android:label="@string/explain_action"
             android:theme="@style/Theme.Explain.Dialog">
+        
+            <!-- System text selection (when hosts support it) -->
             <intent-filter>
                 <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        
+            <!-- Share → Text fallback (works widely) -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <!-- Quick Settings tile: copy text, then tap tile to explain -->
+        <service
+            android:name=".ExplainTileService"
+            android:label="@string/explain_action"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
     </application>
 </manifest>
