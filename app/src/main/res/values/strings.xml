@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Text Explainer</string>
+    <string name="explain_action">Explain (≤100 words)</string>
+    <string name="copy">Copy</string>
+    <string name="close">Close</string>
+    <string name="hello">Select text in any PDF/app, then choose "Explain (≤100 words)".</string>
+</resources>
