@@ -10,12 +10,29 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val input = findViewById<EditText>(R.id.input)
+        val etLang = findViewById<EditText>(R.id.et_lang)
+        val etMaxTokens = findViewById<EditText>(R.id.et_max_tokens)
+        val etTemp = findViewById<EditText>(R.id.et_temperature)
+        val etWordLimit = findViewById<EditText>(R.id.et_word_limit)
+
+        // Load current settings
+        etLang.setText(Settings.getLang(this))
+        etMaxTokens.setText(Settings.getMaxTokens(this).toString())
+        etTemp.setText(Settings.getTemperature(this).toString())
+        etWordLimit.setText(Settings.getWordLimit(this).toString())
+
+        findViewById<Button>(R.id.btn_save).setOnClickListener {
+            Settings.setLang(this, etLang.text?.toString()?.ifBlank { "fa" } ?: "fa")
+            Settings.setMaxTokens(this, etMaxTokens.text?.toString()?.toIntOrNull() ?: 600)
+            Settings.setTemperature(this, etTemp.text?.toString()?.toFloatOrNull() ?: 0.3f)
+            Settings.setWordLimit(this, etWordLimit.text?.toString()?.toIntOrNull() ?: 1000)
+        }
+
         findViewById<Button>(R.id.btn_explain).setOnClickListener {
             val text = input.text?.toString() ?: ""
-            val i = Intent(this, ExplainActivity::class.java)
-                .putExtra("text", text)
-            startActivity(i)
+            startActivity(Intent(this, ExplainActivity::class.java).putExtra("text", text))
         }
     }
 }
