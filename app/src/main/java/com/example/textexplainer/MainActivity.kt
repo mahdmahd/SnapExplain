@@ -17,7 +17,6 @@ class MainActivity : AppCompatActivity() {
         val etTemp = findViewById<EditText>(R.id.et_temperature)
         val etWordLimit = findViewById<EditText>(R.id.et_word_limit)
 
-        // Load current settings
         etLang.setText(Settings.getLang(this))
         etMaxTokens.setText(Settings.getMaxTokens(this).toString())
         etTemp.setText(Settings.getTemperature(this).toString())
