@@ -31,7 +31,7 @@ class ExplainActivity : AppCompatActivity() {
             Intent.ACTION_SEND ->
                 intent.getStringExtra(Intent.EXTRA_TEXT)
             else ->
-                intent.getStringExtra("text") // from launcher paste or QS tile
+                intent.getStringExtra("text")
         } ?: ""
     }
 
@@ -48,7 +48,6 @@ class ExplainActivity : AppCompatActivity() {
         val selected = getIncomingText().trim()
         preview.text = if (selected.length <= 400) selected else selected.substring(0, 400) + "…"
 
-        // Load current settings
         val lang = Settings.getLang(this)
         val maxTokens = Settings.getMaxTokens(this)
         val temp = Settings.getTemperature(this)
@@ -73,7 +72,6 @@ class ExplainActivity : AppCompatActivity() {
                 }
             }
 
-            // Show result
             progress.visibility = View.GONE
             scrollResult.visibility = View.VISIBLE
             result.visibility = View.VISIBLE
