@@ -1,27 +1,85 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:padding="16dp"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/tv"
-        android:text="@string/hello"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:id="@+id/input"
-        android:hint="Paste text here…"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="96dp"
-        android:gravity="top"
-        android:inputType="textMultiLine"
-        android:padding="8dp"
-        android:background="#EEEEEE"
-        android:layout_marginTop="12dp"/>
-    <Button
-        android:id="@+id/btn_explain"
-        android:text="@string/explain_action"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"/>
-</LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical" android:padding="16dp"
+        android:layout_width="match_parent" android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/hello"
+            android:textSize="16sp"
+            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <!-- Paste & explain -->
+        <EditText
+            android:id="@+id/input"
+            android:hint="Paste text here…"
+            android:minHeight="96dp"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:padding="8dp"
+            android:background="#EEEEEE"
+            android:layout_marginTop="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_explain"
+            android:text="@string/explain_action"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Settings header -->
+        <TextView
+            android:text="Settings"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- Language -->
+        <EditText
+            android:id="@+id/et_lang"
+            android:hint="Language (fa/en)"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- max_tokens -->
+        <EditText
+            android:id="@+id/et_max_tokens"
+            android:hint="max_tokens (e.g., 600)"
+            android:inputType="number"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- temperature -->
+        <EditText
+            android:id="@+id/et_temperature"
+            android:hint="temperature 0.0–1.0 (e.g., 0.3)"
+            android:inputType="numberDecimal"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- k (word limit for UI) -->
+        <EditText
+            android:id="@+id/et_word_limit"
+            android:hint="UI word limit k (e.g., 1000)"
+            android:inputType="number"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_save"
+            android:text="Save Settings"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</ScrollView>
