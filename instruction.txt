@@ -1,0 +1,168 @@
+TextExplainerAndroid — Step-by-Step Guide (from zero)
+=====================================================
+
+This guide shows how to go from the ZIP to a built APK using GitHub (no Android Studio, no USB), and how to use the app on Android 14 and on your e‑ink reader.
+
+
+0) Prerequisites
+----------------
+- A GitHub account.
+- Your AvalAI API key (OpenAI‑compatible) if you want real responses.
+- An Android device (Android 8.1+). Android 14 supported.
+- Internet connection on the device to call the API.
+
+
+1) Unzip and set your API key
+-----------------------------
+1. Unzip TextExplainerAndroid.zip anywhere on your computer.
+2. Open: app/src/main/java/com/example/textexplainer/LlmClient.kt
+3. Replace this line with your real key:
+   private const val API_KEY  = "aa-REPLACE_WITH_YOUR_KEY"
+
+   (You are intentionally shipping the key inside the APK for private use.)
+
+4. Save the file.
+
+
+2) Create a new GitHub repository
+---------------------------------
+1. In GitHub, click “New” to create a repository (name: TextExplainerAndroid or anything).
+2. Leave it empty (no README is required).
+3. Click “Add file → Upload files”.
+4. Drag-and-drop **all files and folders** from the unzipped project into the uploader.
+5. Commit to the “main” branch.
+
+
+3) Add the Gradle wrapper in GitHub Codespaces (online, no Android Studio)
+--------------------------------------------------------------------------
+1. On your repo page, click the green “Code” button → “Create codespace on main”.
+2. In the Codespaces terminal, run the following commands:
+
+   source /usr/local/sdkman/bin/sdkman-init.sh || true
+   sdk install java 17.0.11-tem
+   sdk use java 17.0.11-tem
+   java -version
+
+   # Install Gradle 8.2.1 and generate wrapper
+   sdk install gradle 8.2.1
+   sdk use gradle 8.2.1
+   gradle wrapper --gradle-version 8.2.1
+
+   # Commit the wrapper files
+   git add gradlew gradlew.bat gradle/wrapper/*
+   git commit -m "Add Gradle wrapper 8.2.1 (JDK 17)"
+   git push
+
+Notes:
+- The project already contains AGP 8.1.4 and Kotlin 1.9.10 settings.
+- Java 17 is required by AGP 8.x.
+
+
+4) Create a GitHub Actions workflow to build the APK
+----------------------------------------------------
+1. In your repo → “Add file → Create new file” → name it:
+   .github/workflows/android.yml
+
+2. Paste this content and commit:
+
+   name: Android APK (Debug)
+   on:
+     workflow_dispatch:
+     push:
+       branches: [ main ]
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v4
+         - uses: actions/setup-java@v4
+           with:
+             distribution: temurin
+             java-version: 17
+         - run: chmod +x ./gradlew
+         - run: ./gradlew assembleDebug
+         - uses: actions/upload-artifact@v4
+           with:
+             name: app-debug-apk
+             path: app/build/outputs/apk/debug/*.apk
+
+3. Go to the “Actions” tab → select “Android APK (Debug)” → click “Run workflow”.
+4. Wait for it to finish, open the latest run → “Artifacts” → download “app-debug-apk”.
+5. Inside, you’ll find app-debug.apk.
+
+
+5) Install the APK on your device (no USB)
+------------------------------------------
+On your Android device:
+1. Settings → Apps → Special app access → Install unknown apps → allow your browser or file manager.
+2. Transfer the APK by one of:
+   - Upload to Google Drive/Dropbox/GitHub Releases → open link on device → Download → Open.
+   - Email the APK to yourself and open it (some mail apps block APKs).
+   - Copy to microSD → insert into device → open with file manager.
+3. Tap the APK → Install.
+
+
+6) How to use the app on Android 14 (and others)
+------------------------------------------------
+This project includes 3 ways to trigger “Explain (≤100 words)”:
+
+A) System text selection (PROCESS_TEXT):
+   - Works in apps that expose the system selection menu (e.g., Chrome, Keep).
+   - Select text → tap the overflow (⋮) in the selection bar → “Explain (≤100 words)”.
+
+B) Share → Text (ACTION_SEND) — best fallback for many apps including some PDF readers:
+   - Select text → Share → choose “Text Explainer”.
+
+C) Quick Settings tile — works everywhere (copy text from any app, even if it hides PROCESS_TEXT):
+   1. Pull down Quick Settings → Edit tiles → add “Text Explainer” tile.
+   2. Copy any text (e.g., from a PDF note/comment box, or anywhere).
+   3. Tap the tile → the popup dialog opens and shows the explanation.
+
+You also have a simple launcher screen with a “Paste & Explain” button:
+   - Open the app from the launcher → paste text into the box → tap “Explain (≤100 words)”.
+
+
+7) Notes for e‑ink and Android 8.1 device
+-----------------------------------------
+- The dialog theme disables animations to reduce flicker on e‑ink screens.
+- Your device must have internet access for explanations.
+- Some PDF apps (Xodo/Acrobat) use custom selection UIs that may hide system actions.
+  Use Share → Text Explainer or the Quick Settings tile in those cases.
+
+
+8) Troubleshooting
+------------------
+- If GitHub Actions fails with AndroidX error:
+  Ensure gradle.properties contains:
+    android.useAndroidX=true
+    android.enableJetifier=true
+    org.gradle.jvmargs=-Xmx2g -Dfile.encoding=UTF-8
+
+- If you see Kotlin/AGP version errors:
+  - Root build.gradle: AGP 8.1.4, Kotlin 1.9.10 (already set in this project).
+  - Use JDK 17 in Codespaces and in Actions (actions/setup-java with java-version: 17).
+  - Gradle wrapper: 8.2.1 (done in step 3).
+
+- If build error says “Illegal escape: '\s'”:
+  In ExplainActivity.kt use either Regex("""\\s+""") or Regex("\\\\s+").
+  (Already fixed in this bundle.)
+
+- If the app returns “API key missing.”:
+  Edit LlmClient.kt and set your real key:
+    private const val API_KEY  = "aa-..."
+  Rebuild and reinstall.
+
+- If PROCESS_TEXT still doesn’t appear in a specific app:
+  Use Share → Text Explainer or the Quick Settings tile, which works universally.
+
+
+9) (Optional) Release build (signed)
+------------------------------------
+- Later, you can add a second workflow that uses a keystore in GitHub Secrets to produce a signed app-release.apk.
+- For private/internal use, the debug APK is usually sufficient.
+
+
+All done!
+---------
+You now have a private app that can explain any selected/copied text in ≤100 words via your AvalAI endpoint.
+If you run into any error, note the step number and the exact message and fix accordingly.
