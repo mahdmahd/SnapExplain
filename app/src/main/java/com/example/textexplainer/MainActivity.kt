@@ -16,6 +16,9 @@ class MainActivity : AppCompatActivity() {
         val etMaxTokens = findViewById<EditText>(R.id.et_max_tokens)
         val etTemp = findViewById<EditText>(R.id.et_temperature)
         val etWordLimit = findViewById<EditText>(R.id.et_word_limit)
+        val etPrompt = findViewById<EditText>(R.id.et_prompt)
+        etPrompt.setText(Settings.getPrompt(this))
+
 
         // Load current settings
         etLang.setText(Settings.getLang(this))
@@ -24,10 +27,11 @@ class MainActivity : AppCompatActivity() {
         etWordLimit.setText(Settings.getWordLimit(this).toString())
 
         findViewById<Button>(R.id.btn_save).setOnClickListener {
-            Settings.setLang(this, etLang.text?.toString()?.ifBlank { "fa" } ?: "fa")
-            Settings.setMaxTokens(this, etMaxTokens.text?.toString()?.toIntOrNull() ?: 600)
-            Settings.setTemperature(this, etTemp.text?.toString()?.toFloatOrNull() ?: 0.3f)
-            Settings.setWordLimit(this, etWordLimit.text?.toString()?.toIntOrNull() ?: 1000)
+    Settings.setLang(this, etLang.text?.toString()?.ifBlank { "fa" } ?: "fa")
+    Settings.setMaxTokens(this, etMaxTokens.text?.toString()?.toIntOrNull() ?: 600)
+    Settings.setTemperature(this, etTemp.text?.toString()?.toFloatOrNull() ?: 0.3f)
+    Settings.setWordLimit(this, etWordLimit.text?.toString()?.toIntOrNull() ?: 1000)
+    Settings.setPrompt(this, etPrompt.text?.toString()?.ifBlank { Settings.getPrompt(this) } ?: Settings.getPrompt(this))
         }
 
         findViewById<Button>(R.id.btn_explain).setOnClickListener {
