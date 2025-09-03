@@ -60,7 +60,7 @@ class ExplainActivity : AppCompatActivity() {
     }
 
     private fun enforceWordLimit(text: String, maxWords: Int): String {
-        val words = text.trim().split(Regex("\s+"))
+        val words = text.trim().split(Regex("""\s+"""))
         return if (words.size <= maxWords) text else words.take(maxWords).joinToString(" ") + "…"
     }
 }
