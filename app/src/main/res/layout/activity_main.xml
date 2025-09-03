@@ -74,16 +74,18 @@
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-<!-- Custom prompt -->
-         <EditText
-    android:id="@+id/et_prompt"
-    android:hint="Prompt text (instruction for AI)"
-    android:layout_marginTop="8dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:inputType="textMultiLine"
-    android:minHeight="80dp"
-    android:gravity="top"/>
+
+        <!-- Custom prompt -->
+        <EditText
+            android:id="@+id/et_prompt"
+            android:hint="Prompt text (instruction for AI)"
+            android:inputType="textMultiLine"
+            android:minHeight="80dp"
+            android:gravity="top"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <Button
             android:id="@+id/btn_save"
             android:text="Save Settings"
