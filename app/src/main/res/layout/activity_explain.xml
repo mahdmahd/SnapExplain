@@ -12,9 +12,17 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_gravity="center" android:layout_marginTop="12dp"/>
-    <TextView android:id="@+id/result" android:textSize="15sp"
-        android:paddingTop="12dp" android:visibility="gone"
-        android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <ScrollView
+        android:id="@+id/scroll_result"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        android:fillViewport="true">
+    
+        <TextView android:id="@+id/result" android:textSize="15sp"
+            android:paddingTop="12dp" android:visibility="gone"
+            android:layout_width="match_parent" android:layout_height="wrap_content"/>
+    </ScrollView>
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:gravity="end" android:paddingTop="12dp">
         <Button android:id="@+id/btn_copy" android:text="@string/copy"
