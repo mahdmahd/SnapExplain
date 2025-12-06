@@ -1,6 +1,6 @@
-⭐ SnapExplain – Instant LLM Explanations Inside Any Reader App
+⭐ ###SnapExplain – Instant LLM Explanations Inside Any Reader App
 
-📚✨ Highlight → AI insight → Keep reading
+📚✨ ##Highlight → AI insight → Keep reading
 
 When you’re reading a PDF or ebook, you often hit a sentence that needs deeper understanding — context, nuance, meaning, or analysis. Switching apps, copying text, and building a prompt manually breaks your focus and wastes time.
 SnapExplain solves this with one gesture.
@@ -8,7 +8,7 @@ SnapExplain solves this with one gesture.
 This Android tool adds a custom action to the system text-selection menu. Whenever you highlight text in apps like Moon+ Reader, Librera, or any Android reader, you can send it — along with your personalized instruction — to your preferred LLM API.
 The app then shows the model’s answer in a clean popup, right on top of your book. No friction, no context switching.
 
-🚀 What It Does
+🚀 ##What It Does
 
 ✏️ Lets you define a custom prompt for your reading assistant
 
@@ -22,7 +22,7 @@ The app then shows the model’s answer in a clean popup, right on top of your b
 
 🔌 Supports any LLM endpoint (OpenAI, Aval AI, local servers, etc.)
 
-🎯 Why It Exists
+🎯 ##Why It Exists
 
 Because while reading, you often want:
 
@@ -36,12 +36,12 @@ Because while reading, you often want:
 
 📝 Fast summaries
 
-💡 Examples or paraphrasing
+💡 ##Examples or paraphrasing
 
 Doing this manually every time breaks your concentration.
 SnapExplain keeps your workflow intact.
 
-🧩 Features
+🧩 ##Features
 
 ⚙️ Custom prompt system — set your tone, language, and explanation style
 
@@ -55,7 +55,7 @@ SnapExplain keeps your workflow intact.
 
 🌍 Works with any model that accepts API calls
 
-🔧 Settings Explained
+🔧 ##Settings Explained
 🌐 Language (fa/en)
 
 Select the default output language.
