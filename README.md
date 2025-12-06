@@ -1,107 +1,143 @@
-⭐ ###SnapExplain – Instant LLM Explanations Inside Any Reader App###
+# 📚 **SnapExplain**
 
-📚✨ ##Highlight → AI insight → Keep reading
+### ✨ *Instant LLM Explanations Inside Any Reader App*
 
-When you’re reading a PDF or ebook, you often hit a sentence that needs deeper understanding — context, nuance, meaning, or analysis. Switching apps, copying text, and building a prompt manually breaks your focus and wastes time.
-SnapExplain solves this with one gesture.
+When reading PDFs or ebooks, you often encounter sentences that need deeper understanding — meaning, nuance, translation, or analysis. Switching apps and crafting prompts manually disrupts your focus.
 
-This Android tool adds a custom action to the system text-selection menu. Whenever you highlight text in apps like Moon+ Reader, Librera, or any Android reader, you can send it — along with your personalized instruction — to your preferred LLM API.
-The app then shows the model’s answer in a clean popup, right on top of your book. No friction, no context switching.
+**SnapExplain** solves this by integrating directly into Android’s text-selection menu.
+Highlight any text → tap **Explain** → get an LLM-generated response in a popup.
 
-🚀 ##What It Does
+---
 
-✏️ Lets you define a custom prompt for your reading assistant
+## 🚀 **Features**
 
-📌 Integrates into Android’s highlight menu
+* ⚡ **One-tap explanations** from any supported reading app
+* ✏️ **Custom system prompt** for your personalized style
+* 🤖 Works with **any LLM API** (OpenAI, AvalAI, local servers, etc.)
+* 🪟 **Popup window** for quick, non-intrusive results
+* 📲 Integrates seamlessly into **Moon+ Reader**, **Librera**, and most apps
+* 🎛️ Fully configurable: model, tokens, temperature, output limits
+* 🔐 API key stored **locally**
 
-🤖 Sends highlighted text + your prompt to an LLM
+---
 
-💬 Shows the response in a compact popup window
+## 🎯 **Why SnapExplain?**
 
-📲 Works with any reader app that supports standard text selection
+Traditional workflow:
 
-🔌 Supports any LLM endpoint (OpenAI, Aval AI, local servers, etc.)
+1. Copy text
+2. Switch apps
+3. Paste
+4. Re-enter instructions
+5. Read response
+6. Switch back
 
-🎯 ##Why It Exists
+With SnapExplain:
+👉 **Highlight → Explain → Continue reading**
 
-Because while reading, you often want:
+Perfect for:
 
-🔍 A clear explanation of a confusing sentence
+* 🔍 Clarifying complex academic sentences
+* 📖 Understanding difficult vocabulary or phrases
+* 🧠 Getting contextual interpretations
+* 🌐 Nuanced translations
+* 📝 Quick summaries or comparisons
 
-🧠 Context-aware interpretation
+---
 
-📖 Meaning differences and subtle nuance
+## 🧩 **How It Works**
 
-🌐 Smart translations
+1. You define your **custom prompt** (your interpretation/analysis style).
+2. You highlight any text in a reader app.
+3. Android’s selection menu shows **Explain (≤100 words)**.
+4. SnapExplain sends your prompt + highlighted text to the LLM API.
+5. The result appears in a popup window without leaving your book.
 
-📝 Fast summaries
+---
 
-💡 ##Examples or paraphrasing
+## 🔧 **Settings Overview**
 
-Doing this manually every time breaks your concentration.
-SnapExplain keeps your workflow intact.
+### 🌐 **Language (fa/en)**
 
-🧩 ##Features
+Default output language for responses.
 
-⚙️ Custom prompt system — set your tone, language, and explanation style
+### 📏 **max_tokens**
 
-⚡ One-tap activation from any text selection
-
-🪟 Popup response for lightweight reading
-
-🎛️ Fully configurable: model, tokens, temperature, output length
-
-🔐 Local key storage
-
-🌍 Works with any model that accepts API calls
-
-🔧 ##Settings Explained
-🌐 Language (fa/en)
-
-Select the default output language.
-Useful when you want consistency regardless of your prompt.
-
-📏 max_tokens
-
-Maximum length of the model’s output.
+Maximum model output length.
 Higher = longer responses.
-Typical range: 300–2000 depending on your model.
 
-🎚️ temperature (0.0–1.0)
+### 🎚️ **temperature (0.0–1.0)**
 
 Controls creativity:
 
-0.0–0.3 → precise, stable
+* Low → precise
+* Medium → balanced
+* High → creative
 
-0.4–0.7 → balanced, recommended
+### 📝 **UI Word Limit**
 
-0.8–1.0 → more free-form, less predictable
+Caps the number of words shown in the popup (for readability).
 
-📝 UI Word Limit
+### 💡 **Prompt Text**
 
-Caps the number of words shown in the popup.
-Does not affect model generation — only display.
+Your personal instruction for the LLM.
+Example:
 
-💡 Prompt Text
+> “Explain this text in simple Persian and compare it with similar expressions.”
 
-Your core instruction to the AI.
-Examples:
+### 🔗 **Base URL**
 
-“Explain the meaning of the text in simple Persian and compare it with similar expressions.”
-“Summarize the highlighted section in 3 bullet points.”
+Your model endpoint (e.g. `https://api.avalai.ir/v1/`).
 
-This becomes your personalized assistant for every highlight.
+### 🔑 **API Key**
 
-🔗 Base URL
+Used to authenticate with the API (stored locally).
 
-Your API endpoint, e.g.:
-https://api.avalai.ir/v1/
-https://api.openai.com/v1/
+### 🤖 **Model**
 
-🔑 API Key
+Name of the model you want to use (e.g., `gpt-4o`, `gpt-5-mini`, `llama3`, etc.).
 
-Authentication key (stored locally).
+---
 
-🤖 Model
+## 🖼️ **Screenshots**
 
-Which model to call (e.g., gpt-4o, gpt-5-mini, llama3, etc.)
+(Add your images here)
+
+```
+![Screenshot 1](images/screenshot1.jpg)
+![Screenshot 2](images/screenshot2.jpg)
+![Screenshot 3](images/screenshot3.jpg)
+```
+
+---
+
+## ⚙️ **Installation**
+
+1. Download the APK from Releases
+2. Install on Android
+3. Open the app and configure your API settings
+4. Start any reader app
+5. Highlight text → tap **Explain**
+
+---
+
+## 📌 **Roadmap**
+
+* [ ] Offline LLM support
+* [ ] History of explanations
+* [ ] Custom popup themes
+* [ ] Multi-prompt presets
+
+---
+
+## 🛡️ **Privacy**
+
+* Your API key is stored **locally** on your device.
+* Highlighted text is sent **only** to the API endpoint you configure.
+* No data is collected by SnapExplain.
+
+---
+
+## 🙌 **Contributing**
+
+Pull requests, issues, and feature suggestions are welcome.
