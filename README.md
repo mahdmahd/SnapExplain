@@ -104,9 +104,9 @@ Name of the model you want to use (e.g., `gpt-4o`, `gpt-5-mini`, `llama3`, etc.)
 (Add your images here)
 
 ```
-![Screenshot 1](images/screenshot1.jpg)
-![Screenshot 2](images/screenshot2.jpg)
-![Screenshot 3](images/screenshot3.jpg)
+![Screenshot 1](images/Screenshot1.jpg)
+![Screenshot 2](images/Screenshot2.jpg)
+![Screenshot 3](images/Screenshot3.jpg)
 ```
 
 ---
