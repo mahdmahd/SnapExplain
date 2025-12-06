@@ -1,4 +1,4 @@
-⭐ ###SnapExplain – Instant LLM Explanations Inside Any Reader App
+⭐ ###SnapExplain – Instant LLM Explanations Inside Any Reader App###
 
 📚✨ ##Highlight → AI insight → Keep reading
 
