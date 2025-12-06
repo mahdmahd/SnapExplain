@@ -101,11 +101,9 @@ Name of the model you want to use (e.g., `gpt-4o`, `gpt-5-mini`, `llama3`, etc.)
 
 ## 🖼️ **Screenshots**
 
-```
 ![Screenshot1](./images/Screenshot1.jpg)
 ![Screenshot2](./images/Screenshot2.jpg)
 ![Screenshot3](./images/Screenshot3.jpg)
-```
 
 ---
 
